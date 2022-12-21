@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title id="title">Word Smith</title>
+  <link id="css" rel="stylesheet" type="text/css" href="./public/wordSmithStyle.css" />
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro|Work+Sans:200,500|Roboto:300" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <img src="https://content.codecademy.com/courses/intermediate-javascript-requests/wordsmith_logo.svg" id="logo" />
+
+  </header>
+  <main id="main">
+    <div class="container">
+
+      <h1 id="prompt">Enter a Word</h1>
+
+      <form id="form" autocomplete="off">
+        <input type="text" id="input" value="">
+        <button id="submit">SUBMIT</button>
+        <button id="shorten">Shorten</button>
+      </form>
+
+      <div id="responseField">
+
+      </div>
+      <button id="toggle">Switch to POST requests!</button>
+    </div>
+  </main>
+  <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
+  <script src="./public/main.js"></script>
+  <script src="./public/helperFunctions.js"></script>
+  <script src="./public/toggleSite.js"></script>
+</body>
+</html>
