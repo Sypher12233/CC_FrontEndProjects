@@ -1,8 +1,8 @@
-import "./App.css";
 import React from "react";
 import { SearchBar } from "../SearchBar/SearchBar";
 import { SearchResults } from "../SearchResults/SearchResults";
 import { Playlist } from "../Playlist/Playlist";
+import "./App.css";
 import { Spotify } from "../../util/Spotify";
 
 class App extends React.Component {
@@ -10,21 +10,32 @@ class App extends React.Component {
     super(props);
     this.state = {
       searchResults: [
-        // this array of objects will be a mockup for the search result returned from the spotify API
         {
-          name: "Example Search Result 1",
-          artist: "Example Search Artist 1",
-          album: "Example Search Album 1",
+          name: "Example Track Name",
+          artist: "Example Track Artist",
+          album: "Example Track Album",
           id: 1,
         },
+        {
+          name: "Example Track Name 2",
+          artist: "Example Track Artist 2",
+          album: "Example Track Album 2",
+          id: 2,
+        },
       ],
-      playlistName: "Example Playlist Name",
+      playlistName: "Example Playlist",
       playlistTracks: [
         {
-          name: "Example Playlist Track 1",
-          artist: "Example Playlist Artist 1",
-          album: "Example Playlist Album 1",
-          id: 111,
+          name: "Example Playlist Track Name",
+          artist: "Example Playlist Track Artist",
+          album: "Example Playlist Track Album",
+          id: 3,
+        },
+        {
+          name: "Example Playlist Track Name 4",
+          artist: "Example Playlist Track Artist 4",
+          album: "Example Playlist Track Album 4",
+          id: 4,
         },
       ],
     };
@@ -35,24 +46,21 @@ class App extends React.Component {
     this.search = this.search.bind(this);
   }
 
-  // addTrack is gonna be used as an event handler which will be placed in the + button inside the searchResult list
   addTrack(track) {
     const foundTrack = this.state.playlistTracks.find(
       (playlistTrack) => playlistTrack.id === track.id
     );
-    const newPlaylistTracks = this.state.playlistTracks.concat(track);
+    const newTrack = this.state.playlistTracks.concat(track);
     foundTrack
-      ? console.log("Track already exists in the playlist")
-      : this.setState({ playlistTracks: newPlaylistTracks });
+      ? console.log("Track already exits")
+      : this.setState({ playlistTracks: newTrack });
   }
 
-  // remove track will be used as an event handler to remove a song from the playlist when clicked
   removeTrack(track) {
-    // the below .filter method will remove the track (which is passed as an argument) from the playlistTracks and return the rest of the tracks
-    const newPlaylistTracks = this.state.playlistTracks.filter(
+    const isPresent = this.state.playlistTracks.filter(
       (playlistTrack) => playlistTrack.id !== track.id
     );
-    this.setState({ playlistTracks: newPlaylistTracks }); // this will update the playlistTrack state to the filtered newPlaylistTracks
+    this.setState({ playlistTracks: isPresent });
   }
 
   updatePlaylistName(name) {
@@ -61,8 +69,8 @@ class App extends React.Component {
 
   savePlaylist() {
     const trackURIs = this.state.playlistTracks.map((track) => track.uri);
-    const playlistName = this.state.playlistName;
-    Spotify.savePlaylist(playlistName, trackURIs).then(() => {
+    const name = this.state.playlistName;
+    Spotify.savePlaylistName(name, trackURIs).then(() => {
       this.setState({
         playlistName: "New Playlist",
         playlistTracks: [],
@@ -71,9 +79,9 @@ class App extends React.Component {
   }
 
   search(term) {
-    Spotify.search(term).then((results) => {
-      this.setState({ searchResults: results });
-      console.log(results);
+    Spotify.search(term).then((result) => {
+      this.setState({ searchResults: result });
+      // console.log(term);
     });
   }
 

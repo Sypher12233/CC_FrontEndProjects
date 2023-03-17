@@ -1,6 +1,6 @@
-import "./Playlist.css";
 import React from "react";
 import { TrackList } from "../TrackList/TrackList";
+import "./Playlist.css";
 
 export class Playlist extends React.Component {
   constructor(props) {
@@ -16,14 +16,13 @@ export class Playlist extends React.Component {
     return (
       <div className="Playlist">
         <input defaultValue={"New Playlist"} onChange={this.handleNameChange} />
-
         {/* <!-- Add a TrackList component --> */}
         <TrackList
-          tracks={this.props.playlistTracks} // this prop is received from the app component and being passed down to the TrackList component
-          track={this.props.track}
-          onRemove={this.props.onRemove} // this prop is a method received from the app component
+          tracks={this.props.playlistTracks}
+          onRemove={this.props.onRemove}
           isRemoval={true}
         />
+
         <button className="Playlist-save" onClick={this.props.onSave}>
           SAVE TO SPOTIFY
         </button>
